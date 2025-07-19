@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Django Blog
+{% endblock title %}
+
+{% block content %}
+<!-- Full screen container -->
+<div class="min-h-screen w-full bg-gray-900 text-gray-100">
+    <!-- Project Description Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="bg-gray-800 rounded-lg shadow-lg border-l-4 border-yellow-400 p-6">
+            <h2 class="text-3xl font-bold mb-4 text-yellow-400">About This Project</h2>
+            <div class="prose prose-invert max-w-none">
+                <p class="mb-4">Welcome to my Django blog project! This is a fully functional blog application built with Django, the powerful Python web framework.</p>
+                
+                <p class="mb-4">Features include:</p>
+                <ul class="list-disc pl-6 mb-4">
+                    <li>User authentication system</li>
+                    <li>CRUD operations for blog posts</li>
+                    <li>Responsive design with dark theme</li>
+                    <li>Category and tag system</li>
+                    <li>Comment functionality</li>
+                </ul>
+                
+                <p>The project demonstrates my skills in backend development with Django and frontend implementation with Tailwind CSS.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Blogs Section -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-yellow-400">Latest Posts</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            {% for post in latest_posts %}
+            <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
+                {% if post.featured_image %}
+                <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="w-full h-48 object-cover">
+                {% endif %}
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-xl font-semibold mb-2 text-yellow-400">{{ post.title }}</h3>
+                    <p class="text-gray-400 text-sm mb-4">{{ post.published_date|date:"F j, Y" }}</p>
+                    <p class="text-gray-300 mb-4 flex-grow">{{ post.excerpt|truncatewords:20 }}</p>
+                    <a href="{% url 'post_detail' post.slug %}" class="text-yellow-400 hover:text-yellow-300 font-medium self-start">Read More →</a>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-gray-400 col-span-3">No posts available yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- All Blogs Button -->
+    <div class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <a href="/" class="inline-block px-6 py-3 bg-yellow-500 text-gray-900 font-bold rounded-lg hover:bg-yellow-400 transition-colors duration-300">
+            View All Blog Posts
+        </a>
+    </div>
+</div>
+{% endblock content %}
