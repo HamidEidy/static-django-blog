@@ -6,7 +6,7 @@ from datetime import datetime
 FILE_NAME = "sample.txt"  # نام فایل متنی
 REPO_DIR = "/home/hamiddreza/Desktop/blog"  # مسیر ریپوی گیتهاب شما
 GIT_REMOTE = "origin"  # نام ریموت گیت (معمولا origin است)
-GIT_BRANCH = "main"  # نام برنچ (main یا master)
+GIT_BRANCH = "master"  # نام برنچ (main یا master)
 
 def modify_file():
     # اضافه کردن یک Space به فایل
